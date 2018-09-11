@@ -104,11 +104,11 @@ goods.edit = {
             return false;
         }
         if (!goods.addAndEdit._outteridPass) {
-            layer.alert('商品编码有重复，请重新输入后提交！');
+            layer.alert('商品编码有重复，请重新输入后提交1！');
             return false;
         }
-        var checkSku = goods.addAndEdit.commit.checkSkuRepeat();
-        if (checkSku) return;
+       // var checkSku = goods.addAndEdit.commit.checkSkuRepeat();
+       // if (checkSku) return;
         var info = goods.addAndEdit.commit.commitInfo();
         if (info) {
             info.State = 2;
@@ -138,7 +138,7 @@ goods.edit = {
             return false;
         }
         if (!goods.addAndEdit._outteridPass) {
-            layer.alert('商品编码有重复，请重新输入后提交！');
+            layer.alert('商品编码有重复，请重新输入后提交2！');
             return false;
         }
         var url = '/goods/audit/' + goods.edit._curGroupId;
@@ -154,7 +154,7 @@ goods.edit = {
             return false;
         }
         if (!goods.addAndEdit._outteridPass) {
-            layer.alert('商品编码有重复，请重新输入后提交！');
+            layer.alert('商品编码有重复，请重新输入后提交3！');
             return false;
         }
         var checkSku = goods.addAndEdit.commit.checkSkuRepeat();
@@ -235,16 +235,16 @@ goods.add = {
      * 保存提交
      */
     commitSave: function () {
-        if (!goods.addAndEdit._outteridPass) {
-            layer.alert('商品编码有重复，请重新输入后提交！');
-            return false;
-        }
+    //    if (!goods.addAndEdit._outteridPass) {
+    //        layer.alert('商品编码有重复，请重新输入后提交4！');
+    //        return false;
+    //    }
         if (!goods.addAndEdit._merchantCheck) {
             layer.alert(goods.addAndEdit._merchantCheckStr);
             return false;
         }
-        var checkSku = goods.addAndEdit.commit.checkSkuRepeat();
-        if (checkSku) return;
+       // var checkSku = goods.addAndEdit.commit.checkSkuRepeat();
+       // if (checkSku) return;
         var info = goods.addAndEdit.commit.commitInfo();
         var url = '';
         if (info) {
@@ -899,7 +899,7 @@ goods.addAndEdit = {
                 return false;
             }
             if (!goods.addAndEdit._outteridPass) {
-                layer.alert('商品编码有重复，请重新输入后提交！');
+                layer.alert('商品编码有重复，请重新输入后提交5！');
                 return false;
             }
             var goodsGroup = {};
@@ -920,16 +920,16 @@ goods.addAndEdit = {
             //快递费用
             goodsGroup.express_fee = $("#expressFeeInput").val();
             //处理sku 信息
-            goodsGroup.sku = goods.addAndEdit.commit.dealSku(goodsGroup.outerId);
+           // goodsGroup.sku = goods.addAndEdit.commit.dealSku(goodsGroup.outerId);
             if (goodsGroup.sku.length < 1) {
                 layer.alert("请设定商品规则。");
                 return false;
             }
             //检查sku 是否有空值
-            if (goods.addAndEdit._skudb({Skuid: ""}).count() > 0) {
-                layer.alert('商品sku 有空值，请检查');
-                return false;
-            }
+           // if (goods.addAndEdit._skudb({Skuid: ""}).count() > 0) {
+           //     layer.alert('商品sku 有空值，请检查');
+           //     return false;
+           // }
             //尺码和颜色检测
             if (goods.addAndEdit.skus._colorList({checked: true, color: ""}).count() > 0) {
                 layer.alert('选择的颜色未填写具体内容项，请检查后再重新提交');
@@ -993,26 +993,26 @@ goods.addAndEdit = {
         /**
          * 检查sku 是否有重复
          */
-        checkSkuRepeat: function () {
-            var data = goods.addAndEdit._skudb().get();
-            var count = goods.addAndEdit._skudb().count();
-            var repeat = false;
-            for (var i = 0; i < count; i++) {
-                if (goods.addAndEdit._skudb({Skuid: data[i].Skuid}).count() > 1) {
-                    repeat = true;
-                }
-            }
-            if (repeat) {
-                layer.alert('sku 重复，请检查');
-            }
-            //检查sku 是否为空
-            var nullSku = goods.addAndEdit._skudb({Skuid: ""}).count();
-            if (nullSku > 0) {
-                repeat = true;
-                layer.alert('sku 有空值，请检查后重新输入');
-            }
-            return repeat;
-        },
+//        checkSkuRepeat: function () {
+//            var data = goods.addAndEdit._skudb().get();
+//            var count = goods.addAndEdit._skudb().count();
+//            var repeat = false;
+//            for (var i = 0; i < count; i++) {
+//                if (goods.addAndEdit._skudb({Skuid: data[i].Skuid}).count() > 1) {
+//                    repeat = true;
+//                }
+//            }
+//            if (repeat) {
+//                layer.alert('sku 重复，请检查');
+//            }
+//            //检查sku 是否为空
+//            var nullSku = goods.addAndEdit._skudb({Skuid: ""}).count();
+//            if (nullSku > 0) {
+//                repeat = true;
+//                layer.alert('sku 有空值，请检查后重新输入');
+//            }
+//            return repeat;
+//        },
         getImgList: function () {
             var imgdb = TAFFY();
             var imgPaths = [];
@@ -1048,19 +1048,19 @@ goods.addAndEdit = {
  * @param maxCount
  * @constructor
  */
-function Sku(color, size, goodsId, sku, price, maxCount, salePrice, changeFlag) {
-    this.FilterConfig = color + "," + size;
-    this.color = color;
-    this.size = size;
-    this.Skuid = sku ? sku : "";
-    this.GoodsSalePrice = salePrice;
-    this.GoodsSupplyPrice = typeof (price) == 'undefined' ? 0 : price;
-    this.MaxCount = typeof (maxCount) == 'undefined' ? 0 : maxCount;
-    this.goodsId = goodsId ? goodsId : "";
-    this.id = UUID.generate();
-    //是否有改动
-    this.changeFlag = typeof (changeFlag) == 'undefined' ? true : changeFlag;
-}
+//function Sku(color, size, goodsId, sku, price, maxCount, salePrice, changeFlag) {
+//    this.FilterConfig = color + "," + size;
+//    this.color = color;
+//    this.size = size;
+//    this.Skuid = sku ? sku : "";
+//    this.GoodsSalePrice = salePrice;
+//    this.GoodsSupplyPrice = typeof (price) == 'undefined' ? 0 : price;
+//    this.MaxCount = typeof (maxCount) == 'undefined' ? 0 : maxCount;
+//    this.goodsId = goodsId ? goodsId : "";
+//    this.id = UUID.generate();
+//    //是否有改动
+//    this.changeFlag = typeof (changeFlag) == 'undefined' ? true : changeFlag;
+//}
 
 /**
  * 颜色基类

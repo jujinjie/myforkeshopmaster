@@ -239,7 +239,7 @@ function createGoodsGroup(req, res) {
             res.json({code: 200, data: result.groupId});
         } else {
             if (result.errorCode == '1062' || result.errorCode == '1169') {
-                res.json({code: 300, data: '商品编码有重复，请重新输入后，再提交'});
+                res.json({code: 300, data: '商品编码有重复，请重新输入后，再提交A'});
             } else {
                 res.json({code: 300, data: '提交失败'});
             }
@@ -689,13 +689,13 @@ function checkOuteriid(req, res) {
     Sync(function () {
         try {
             var outeriid = req.body.outeriid;
-            var sql = 'SELECT count(1) as ct from bbx_goodsgroup WHERE Outeriid=?;';
-            var count = mysql_db.query.sync(mysql_db, sql, [outeriid])[0][0];
-            if (count.ct == 0) {
+           // var sql = 'SELECT count(1) as ct from bbx_goodsgroup WHERE Outeriid=?;';
+           // var count = mysql_db.query.sync(mysql_db, sql, [outeriid])[0][0];
+           // if (count.ct == 0) {
                 res.json({code: 200, msg: true});
-            } else {
-                res.json({code: 201, msg: "商品编码已存在，请重新输入！"});
-            }
+           // } else {
+          //      res.json({code: 201, msg: "商品编码已存在，请重新输入！"});
+         //   }
         } catch (e) {
             console.log(e);
             res.json({code: 300, msg: false});
