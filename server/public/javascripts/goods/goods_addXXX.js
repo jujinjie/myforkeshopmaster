@@ -328,15 +328,15 @@ function getGroupInfo() {
     goodsGroup.express_fee = parseFloat($("#ExpressFee").val());
     goodsGroup.goodsDetail = $('#summernote').code();
 
-    getFinalSkus();
-    if (goodsGroup.sku.length < 1) {
-        layer.alert("请设定商品规则。");
-        return false;
-    }
-    var skuResult = validateSku();
-    if (!skuResult) {
-        return false;
-    }
+   // getFinalSkus();
+   // if (goodsGroup.sku.length < 1) {
+   //     layer.alert("请设定商品规则。");
+   //     return false;
+   // }
+   // var skuResult = validateSku();
+   // if (!skuResult) {
+   //     return false;
+   // }
 
     var imgPaths = [];
     $("#thumbContainer img").each(function (i, img) {

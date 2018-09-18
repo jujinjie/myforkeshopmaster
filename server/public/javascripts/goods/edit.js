@@ -31,15 +31,15 @@ goods.edit = {
         });
         //保存并提交审核
         $("#btnSubmitCheck_edit").on('click', function () {
-            var queryTaoBaoGoodsId = common.QueryString('queryTaoBaoGoodsId');
-            if (queryTaoBaoGoodsId == null) {
-                goods.edit.saveAndCommit();
-            } else {
-                goods.add.saveAadCommitTaobaoSku();
-            }
+//            var queryTaoBaoGoodsId = common.QueryString('queryTaoBaoGoodsId');
+//            if (queryTaoBaoGoodsId == null) {
+//                goods.edit.saveAndCommit();
+//            } else {
+//         //       goods.add.saveAadCommitTaobaoSku();
+//            }
         });
         //检查商家是否审核通过
-        goods.addAndEdit.checkMerchantInfo();
+       // goods.addAndEdit.checkMerchantInfo();
     },
     divHide1: function (divId) {
         $('#' + divId).hide();
@@ -103,10 +103,10 @@ goods.edit = {
             layer.alert(goods.addAndEdit._merchantCheckStr);
             return false;
         }
-        if (!goods.addAndEdit._outteridPass) {
-            layer.alert('商品编码有重复，请重新输入后提交1！');
-            return false;
-        }
+//        if (!goods.addAndEdit._outteridPass) {
+//            layer.alert('商品编码有重复，请重新输入后提交1！');
+//            return false;
+//        }
        // var checkSku = goods.addAndEdit.commit.checkSkuRepeat();
        // if (checkSku) return;
         var info = goods.addAndEdit.commit.commitInfo();
@@ -334,7 +334,7 @@ goods.addAndEdit = {
     _outteridPass: true,
     //检查商家是否审核通过
     _merchantCheck: true,
-    _merchantCheckStr: '您的基本信息审核未通过，请联系福克商城运营审核，感谢您的配合',
+    _merchantCheckStr: '您的基本信息审核未通过，请联系审核，感谢您的配合',
 
     init: function () {
         goods.addAndEdit.skus.universalTable();
@@ -718,8 +718,8 @@ goods.addAndEdit = {
                     for (var i = 0; i < goods.addAndEdit.skus._colorList({checked: true}).count(); i++) {
                         if (addSize) {
                             var _color = goods.addAndEdit.skus._colorList({checked: true}).get()[i].color;
-                            var insertInfo = new Sku(_color, addSize);
-                            goods.addAndEdit._skudb.insert(insertInfo);
+                           // var insertInfo = new Sku(_color, addSize);
+                           // goods.addAndEdit._skudb.insert(insertInfo);
                         }
                     }
                 }
@@ -918,13 +918,13 @@ goods.addAndEdit = {
             goodsGroup.saleState = parseInt($('#publishState input[name="saleState"]:checked ').val());
             goodsGroup.goodsDetail = $('#summernote_edit').code().replace(/<p><br><\/p>/ig, '').replace(/<br>/ig, '');
             //快递费用
-            goodsGroup.express_fee = $("#expressFeeInput").val();
+//            goodsGroup.express_fee = $("#expressFeeInput").val();
             //处理sku 信息
            // goodsGroup.sku = goods.addAndEdit.commit.dealSku(goodsGroup.outerId);
-            if (goodsGroup.sku.length < 1) {
-                layer.alert("请设定商品规则。");
-                return false;
-            }
+//            if (goodsGroup.sku.length < 1) {
+//                layer.alert("请设定商品规则。");
+//                return false;
+//            }
             //检查sku 是否有空值
            // if (goods.addAndEdit._skudb({Skuid: ""}).count() > 0) {
            //     layer.alert('商品sku 有空值，请检查');
